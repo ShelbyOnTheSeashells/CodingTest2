@@ -1,0 +1,132 @@
+[gd_scene load_steps=14 format=3 uid="uid://bp1ufhwpulax0"]
+
+[ext_resource type="Script" path="res://scenes/mainMenu.gd" id="1_hm5qy"]
+[ext_resource type="PackedScene" uid="uid://c6m60etnt3nej" path="res://scenes/transition.tscn" id="2_4vpk6"]
+[ext_resource type="Texture2D" uid="uid://c2qfudtj5rjps" path="res://assets/art/bg.png" id="2_r15ej"]
+[ext_resource type="Texture2D" uid="uid://b2ovb3gowpinp" path="res://assets/art/house.png" id="3_sslco"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5wvrr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ts2po"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i5sbj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_44xn1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tt24"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6jtqk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nurm4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jh5s7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22hvp"]
+
+[node name="mainMenu" type="Node2D"]
+script = ExtResource("1_hm5qy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1640.0
+offset_top = -16.0
+offset_right = 1641.0
+offset_bottom = 297.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_r15ej")
+
+[node name="House" type="TextureRect" parent="CanvasLayer"]
+offset_left = -301.0
+offset_top = 40.0
+offset_right = 476.0
+offset_bottom = 574.0
+texture = ExtResource("3_sslco")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="House2" type="TextureRect" parent="CanvasLayer"]
+offset_left = 663.0
+offset_top = 40.0
+offset_right = 1440.0
+offset_bottom = 574.0
+texture = ExtResource("3_sslco")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -131.0
+offset_top = -100.0
+offset_right = 131.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Delivery Dash"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.644
+anchor_right = 0.5
+anchor_bottom = 0.644
+offset_left = -131.0
+offset_top = -89.312
+offset_right = 132.0
+offset_bottom = 20.688
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Start" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5wvrr")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ts2po")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_i5sbj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_44xn1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1tt24")
+text = "Start"
+
+[node name="Give Up" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5wvrr")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6jtqk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nurm4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jh5s7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_22hvp")
+text = "Give Up"
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 265.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 25
+text = "High Score: 0"
+
+[node name="Credit" type="Label" parent="CanvasLayer"]
+offset_left = 18.0
+offset_top = 595.0
+offset_right = 265.0
+offset_bottom = 630.0
+theme_override_font_sizes/font_size = 25
+text = "Lexi Singson"
+
+[node name="Transition" parent="." instance=ExtResource("2_4vpk6")]
+
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/Start" to="." method="_on_start_button_down"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/Give Up" to="." method="_on_give_up_button_down"]

@@ -1,0 +1,815 @@
+[gd_scene load_steps=29 format=3 uid="uid://c5q7hqf72xaga"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_0vyr1"]
+[ext_resource type="Texture2D" uid="uid://cedyk4qyca1wp" path="res://assets/art/truck.png" id="2_oy0p6"]
+[ext_resource type="PackedScene" uid="uid://hxno2fdcw22f" path="res://scenes/player.tscn" id="4_lejsn"]
+[ext_resource type="PackedScene" uid="uid://bn0vbafj2gkvm" path="res://scenes/recipient.tscn" id="4_snmco"]
+[ext_resource type="Script" path="res://scripts/PauseMenu.gd" id="5_krn3j"]
+[ext_resource type="PackedScene" uid="uid://c6m60etnt3nej" path="res://scenes/transition.tscn" id="6_2qgdm"]
+[ext_resource type="Script" path="res://scenes/GameOver.gd" id="6_o2coa"]
+[ext_resource type="PackedScene" uid="uid://bsg0t6q3rjw04" path="res://scenes/barrier.tscn" id="8_hfjlc"]
+[ext_resource type="Texture2D" uid="uid://c2qfudtj5rjps" path="res://assets/art/bg.png" id="9_fecgb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1vcog"]
+size = Vector2(601.5, 235)
+
+[sub_resource type="Curve" id="Curve_2herc"]
+_data = [Vector2(0.0561798, 0.054945), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_506mg"]
+_data = [Vector2(0.365169, 0.362637), 0.0, 0.0, 0, 0, Vector2(0.758427, 0.681319), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_6vbhj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(871, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_8w7m3"]
+resource_name = "objective"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.203063, 1),
+"update": 0,
+"values": [Vector2(871, 96), Vector2(871, 76)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.435275, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sgcn5"]
+_data = {
+"RESET": SubResource("Animation_6vbhj"),
+"objective": SubResource("Animation_8w7m3")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ys1wu"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i8k8x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sodw4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cv8ps"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vhgtl"]
+
+[sub_resource type="Animation" id="Animation_fh1id"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-406, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:canPause")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(358, 738)]
+}
+
+[sub_resource type="Animation" id="Animation_kutx7"]
+resource_name = "pauseMenuClose"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.34151, 0.34151),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-406, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.34151, 0.34151),
+"update": 0,
+"values": [Vector2(-129, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:canPause")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_mht82"]
+resource_name = "pauseMenuOpen"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.34151, 1),
+"update": 0,
+"values": [Vector2(-406, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.34151, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-129, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:canPause")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_omd3a"]
+_data = {
+"RESET": SubResource("Animation_fh1id"),
+"pauseMenuClose": SubResource("Animation_kutx7"),
+"pauseMenuOpen": SubResource("Animation_mht82")
+}
+
+[sub_resource type="Animation" id="Animation_ttqhd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect/GameOver:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(404, 182)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect/Score:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect/HighScore:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect/VBoxContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(402, 377)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TextureRect/VBoxContainer:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TextureRect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("TextureRect:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("TextureRect/GameOver:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_14kjg"]
+resource_name = "gameOver"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect/GameOver:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.277392, 1),
+"update": 0,
+"values": [Vector2(404, 182), Vector2(404, 210)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect/Score:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(412, 310)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect/HighScore:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(593, 310)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect/VBoxContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.5, 3),
+"transitions": PackedFloat32Array(0.277392, 1),
+"update": 0,
+"values": [Vector2(402, 413), Vector2(402, 377)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TextureRect/Score:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.5, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TextureRect/HighScore:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("TextureRect/VBoxContainer:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.5, 3),
+"transitions": PackedFloat32Array(0.277392, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("TextureRect:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(0.277392, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TextureRect/GameOver:self_modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.7, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TextureRect:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../PauseMenu:canPause")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rv2vy"]
+_data = {
+"RESET": SubResource("Animation_ttqhd"),
+"gameOver": SubResource("Animation_14kjg")
+}
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2sukj"]
+
+[node name="game" type="Node2D" node_paths=PackedStringArray("scoreLabel", "timerLabel", "gameOver", "timer", "ambience")]
+script = ExtResource("1_0vyr1")
+scoreLabel = NodePath("UI/Score")
+timerLabel = NodePath("UI/Timer")
+gameOver = NodePath("GameOver")
+timer = NodePath("Timer")
+ambience = NodePath("Player/Ambience")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -529.0
+offset_top = -59.0
+offset_right = 3904.0
+offset_bottom = 589.0
+texture = ExtResource("9_fecgb")
+
+[node name="Truck" type="StaticBody2D" parent="." groups=["Truck"]]
+position = Vector2(5, 505)
+collision_layer = 3
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Truck"]
+position = Vector2(-240.25, -57.5)
+shape = SubResource("RectangleShape2D_1vcog")
+
+[node name="Sprite2D" type="Sprite2D" parent="Truck"]
+position = Vector2(-245, -88)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_oy0p6")
+
+[node name="Recipient" parent="." instance=ExtResource("4_snmco")]
+position = Vector2(981, 450)
+
+[node name="Recipient2" parent="." instance=ExtResource("4_snmco")]
+position = Vector2(1605, 450)
+id = 1
+
+[node name="Recipient3" parent="." instance=ExtResource("4_snmco")]
+position = Vector2(2236, 450)
+id = 2
+
+[node name="Recipient4" parent="." instance=ExtResource("4_snmco")]
+position = Vector2(2877, 450)
+id = 3
+
+[node name="Player" parent="." node_paths=PackedStringArray("game", "camera", "uiAnimation", "objectivePanel", "objective") instance=ExtResource("4_lejsn")]
+position = Vector2(534, 462)
+game = NodePath("..")
+camera = NodePath("../PauseMenu/Camera2D")
+uiAnimation = NodePath("../UI/AnimationPlayer")
+objectivePanel = NodePath("../UI/Panel")
+objective = NodePath("../UI/Panel/Objective")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Rain" type="CPUParticles2D" parent="UI"]
+process_mode = 3
+position = Vector2(480, 0)
+lifetime = 1.2
+speed_scale = 5.72
+draw_order = 1
+emission_shape = 3
+emission_rect_extents = Vector2(900, 1)
+gravity = Vector2(100, 1000)
+damping_max = 48.485
+scale_amount_min = 40.0
+scale_amount_max = 40.0
+split_scale = true
+scale_curve_x = SubResource("Curve_2herc")
+scale_curve_y = SubResource("Curve_506mg")
+
+[node name="Score" type="Label" parent="UI"]
+offset_left = 781.0
+offset_top = 16.0
+offset_right = 977.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 28
+text = "Score: 0"
+
+[node name="Timer" type="Label" parent="UI"]
+offset_left = 1043.0
+offset_top = 16.0
+offset_right = 1239.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 28
+text = "60s"
+
+[node name="Panel" type="Panel" parent="UI"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+offset_left = 871.0
+offset_top = 96.0
+offset_right = 1096.0
+offset_bottom = 142.0
+
+[node name="Objective" type="Label" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.502
+anchor_top = 0.467
+anchor_right = 0.502
+anchor_bottom = 0.467
+offset_left = -62.95
+offset_top = -11.482
+offset_right = 63.05
+offset_bottom = 11.518
+grow_horizontal = 2
+grow_vertical = 2
+text = "SHIP TO DOOR 1"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_sgcn5")
+}
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+
+[node name="PauseMenu" type="CanvasLayer" parent="." node_paths=PackedStringArray("player", "camera")]
+process_mode = 3
+script = ExtResource("5_krn3j")
+player = NodePath("../Player")
+camera = NodePath("Camera2D")
+canPause = false
+
+[node name="Camera2D" type="Camera2D" parent="PauseMenu"]
+position = Vector2(533, 411)
+
+[node name="Panel" type="Panel" parent="PauseMenu"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -406.0
+offset_top = -3.0
+offset_right = -48.0
+offset_bottom = 87.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ys1wu")
+
+[node name="Title" type="Label" parent="PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -172.0
+offset_right = 99.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Delivery Dash"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.502
+anchor_top = 0.554
+anchor_right = 0.502
+anchor_bottom = 0.554
+offset_left = -138.612
+offset_top = -95.992
+offset_right = 137.388
+offset_bottom = 38.008
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Continue" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_i8k8x")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_sodw4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cv8ps")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vhgtl")
+text = "CONTINUE"
+
+[node name="Return" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_i8k8x")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_sodw4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cv8ps")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vhgtl")
+text = "RETURN"
+
+[node name="GiveUp" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_i8k8x")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_sodw4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cv8ps")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vhgtl")
+text = "GIVE UP"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu"]
+libraries = {
+"": SubResource("AnimationLibrary_omd3a")
+}
+
+[node name="GameOver" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
+process_mode = 3
+script = ExtResource("6_o2coa")
+player = NodePath("../Player")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
+libraries = {
+"": SubResource("AnimationLibrary_rv2vy")
+}
+
+[node name="TextureRect" type="TextureRect" parent="GameOver"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0, 0, 0, 0.376471)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_2sukj")
+
+[node name="GameOver" type="Label" parent="GameOver/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -172.0
+offset_top = -142.0
+offset_right = 172.0
+offset_bottom = -58.9996
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Game Over!"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="GameOver/TextureRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7324.0
+offset_top = 4198.0
+offset_right = 7453.0
+offset_bottom = 4240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "SCORE:"
+
+[node name="HighScore" type="Label" parent="GameOver/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7505.0
+offset_top = 4198.0
+offset_right = 7660.0
+offset_bottom = 4240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "HIGHSCORE:"
+horizontal_alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver/TextureRect"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = 53.0
+offset_right = 175.0
+offset_bottom = 169.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Restart" type="Button" parent="GameOver/TextureRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "START OVER"
+
+[node name="Return" type="Button" parent="GameOver/TextureRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "RETURN"
+
+[node name="Transition" parent="." node_paths=PackedStringArray("pauseMenu") instance=ExtResource("6_2qgdm")]
+pauseMenu = NodePath("../PauseMenu")
+
+[node name="Barrier" parent="." instance=ExtResource("8_hfjlc")]
+position = Vector2(3273, 310)
+
+[connection signal="finished" from="Player/Ambience" to="." method="_on_ambience_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="button_down" from="PauseMenu/Panel/VBoxContainer/Continue" to="PauseMenu" method="_on_continue_button_down"]
+[connection signal="button_down" from="PauseMenu/Panel/VBoxContainer/Return" to="PauseMenu" method="_on_return_button_down"]
+[connection signal="button_down" from="PauseMenu/Panel/VBoxContainer/GiveUp" to="PauseMenu" method="_on_give_up_button_down"]
+[connection signal="button_down" from="GameOver/TextureRect/VBoxContainer/Restart" to="GameOver" method="_on_restart_button_down"]
+[connection signal="button_down" from="GameOver/TextureRect/VBoxContainer/Return" to="GameOver" method="_on_return_button_down"]
+
+[editable path="Player"]
